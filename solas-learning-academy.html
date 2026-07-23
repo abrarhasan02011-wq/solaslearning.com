@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solas Learning Academy</title>
+<meta name="description" content="Solas Learning Academy — online classes, resources, assignments and more.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root{
+    --navy:#0e2438;
+    --navy-2:#132c45;
+    --navy-3:#1a3a5c;
+    --gold:#e8b64a;
+    --gold-2:#f4d488;
+    --cream:#faf6ee;
+    --ink:#16202b;
+    --muted:#5c6b7a;
+    --line:#e4e0d5;
+    --success:#2f9e5e;
+    --danger:#d1483f;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.55;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  a{color:inherit;}
+  button{font-family:inherit;cursor:pointer;}
+  .container{max-width:1180px;margin:0 auto;padding:0 24px;}
+  ::selection{background:var(--gold-2);}
+
+  /* ---------- signature: sunburst divider (Solas = "light") ---------- */
+  .sunburst{
+    width:52px;height:52px;margin:0 auto 18px;
+    display:block;
+  }
+  .sunburst-inline{width:34px;height:34px;flex-shrink:0;}
+
+  /* ---------- Nav ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:200;
+    background:rgba(14,36,56,0.96);
+    backdrop-filter:blur(6px);
+    color:var(--cream);
+  }
+  .topbar-inner{
+    max-width:1180px;margin:0 auto;padding:16px 24px;
+    display:flex;align-items:center;justify-content:space-between;gap:20px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:1.2rem;font-weight:600;}
+  .navlinks{display:flex;align-items:center;gap:26px;flex-wrap:wrap;}
+  .navlinks button.link{
+    background:none;border:none;color:var(--cream);opacity:0.82;font-size:0.94rem;padding:0;
+  }
+  .navlinks button.link:hover{opacity:1;text-decoration:underline;text-underline-offset:3px;}
+  .pill-badge{
+    background:rgba(232,182,74,0.18);color:var(--gold-2);
+    padding:4px 12px;border-radius:999px;font-size:0.78rem;text-transform:capitalize;
+  }
+  .btn{
+    border:none;border-radius:9px;padding:11px 20px;font-weight:600;font-size:0.92rem;
+    transition:transform .12s ease, box-shadow .12s ease, background .15s ease;
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn-gold{background:var(--gold);color:var(--navy);}
+  .btn-gold:hover{background:var(--gold-2);}
+  .btn-outline-light{background:transparent;color:var(--cream);border:1.4px solid rgba(250,246,238,0.5);}
+  .btn-outline-light:hover{background:rgba(250,246,238,0.08);}
+  .btn-navy{background:var(--navy);color:var(--cream);}
+  .btn-navy:hover{background:var(--navy-3);}
+  .btn-ghost{background:transparent;color:var(--navy);border:1.4px solid var(--line);}
+  .btn-ghost:hover{border-color:var(--navy);}
+  .btn-danger{background:#fbe7e5;color:var(--danger);}
+  .btn-sm{padding:7px 14px;font-size:0.83rem;}
+  .btn-block{width:100%;}
+  .btn:disabled{opacity:0.55;cursor:not-allowed;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(232,182,74,0.25), transparent 60%),
+      linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+    color:var(--cream);
+    padding:96px 24px 110px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--gold-2);margin-bottom:22px;font-weight:600;
+  }
+  .hero h1{font-size:clamp(2.2rem,4.5vw,3.4rem);margin-bottom:20px;max-width:760px;margin-left:auto;margin-right:auto;}
+  .hero p{font-size:1.12rem;opacity:0.86;max-width:600px;margin:0 auto 34px;}
+  .hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+  /* ---------- sections ---------- */
+  .section{padding:76px 0;}
+  .section-tight{padding:48px 0;}
+  .eyebrow-label{
+    font-size:0.8rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold-2-ink,#a5811f);
+    font-weight:700;margin-bottom:10px;
+  }
+  .section-title{font-size:1.9rem;margin-bottom:10px;}
+  .section-subtitle{color:var(--muted);max-width:560px;margin-bottom:38px;}
+
+  .grid{display:grid;gap:22px;}
+  .grid-3{grid-template-columns:repeat(3,1fr);}
+  .grid-2{grid-template-columns:repeat(2,1fr);}
+  @media (max-width:880px){.grid-3,.grid-2{grid-template-columns:1fr;}}
+
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px;
+  }
+  .feature-card{text-align:left;}
+  .feature-icon{
+    width:44px;height:44px;border-radius:10px;
+    background:linear-gradient(135deg,var(--navy),var(--navy-3));
+    color:var(--gold-2);display:flex;align-items:center;justify-content:center;
+    font-size:1.2rem;margin-bottom:16px;
+  }
+  .feature-card h3{font-size:1.08rem;margin-bottom:8px;font-weight:600;}
+  .feature-card p{color:var(--muted);font-size:0.92rem;margin:0;}
+
+  /* ---------- course cards ---------- */
+  .course-card{display:flex;flex-direction:column;gap:12px;}
+  .course-card .subject-tag{
+    align-self:flex-start;background:#eef2f6;color:var(--navy);
+    font-size:0.72rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;
+    padding:4px 10px;border-radius:999px;
+  }
+  .course-card h3{font-size:1.15rem;}
+  .course-card .teacher{color:var(--muted);font-size:0.86rem;}
+  .course-price{font-weight:700;color:var(--navy);}
+  .course-price.free{color:var(--success);}
+  .join-code{
+    font-family:monospace;background:#eef2f6;color:var(--navy);
+    padding:3px 9px;border-radius:6px;font-weight:700;letter-spacing:1px;font-size:0.85rem;
+  }
+
+  /* ---------- auth ---------- */
+  .auth-wrap{min-height:70vh;display:flex;align-items:center;justify-content:center;padding:60px 20px;}
+  .auth-card{width:100%;max-width:420px;box-shadow:0 12px 40px rgba(14,36,56,0.08);}
+  .form-group{margin-bottom:16px;}
+  .form-group label{display:block;font-size:0.86rem;font-weight:600;margin-bottom:6px;}
+  .form-group input,.form-group select,.form-group textarea{
+    width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;
+    font-size:0.94rem;background:#fdfcf9;font-family:inherit;
+  }
+  .form-group textarea{min-height:100px;resize:vertical;}
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+    outline:none;border-color:var(--navy);background:#fff;
+  }
+  .form-row{display:flex;gap:12px;}
+  .form-row .form-group{flex:1;}
+  .role-toggle{display:flex;gap:10px;margin-bottom:16px;}
+  .role-toggle button{
+    flex:1;padding:10px;border-radius:8px;border:1.4px solid var(--line);background:#fff;font-weight:600;font-size:0.86rem;
+  }
+  .role-toggle button.active{border-color:var(--navy);background:var(--navy);color:var(--cream);}
+
+  .alert{padding:11px 14px;border-radius:8px;font-size:0.89rem;margin-bottom:16px;}
+  .alert-error{background:#fbe7e5;color:var(--danger);border:1px solid #f3c7c2;}
+  .alert-success{background:#e5f6ec;color:var(--success);border:1px solid #bfe6cd;}
+  .helper-text{font-size:0.85rem;color:var(--muted);text-align:center;margin-top:14px;}
+  .helper-text button.linklike{background:none;border:none;color:var(--navy);font-weight:700;text-decoration:underline;padding:0;}
+
+  /* ---------- dashboard ---------- */
+  .dash-header{
+    display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:30px;
+  }
+  .dash-header h1{font-size:1.8rem;}
+  .dash-header p{color:var(--muted);margin-top:4px;}
+  .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:34px;}
+  @media (max-width:880px){.stat-row{grid-template-columns:repeat(2,1fr);}}
+  .stat-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;}
+  .stat-card .val{font-size:1.55rem;font-weight:700;font-family:'Fraunces',serif;color:var(--navy);}
+  .stat-card .lbl{font-size:0.83rem;color:var(--muted);}
+
+  .tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin-bottom:26px;flex-wrap:wrap;}
+  .tabs button{
+    background:none;border:none;padding:11px 16px;font-weight:600;color:var(--muted);
+    border-bottom:3px solid transparent;font-size:0.92rem;
+  }
+  .tabs button.active{color:var(--navy);border-color:var(--gold);}
+
+  .list-item{
+    display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+    background:#fff;border:1px solid var(--line);border-radius:11px;padding:16px 18px;margin-bottom:10px;
+  }
+  .list-item h4{margin:0 0 4px;font-size:1rem;font-family:'Inter',sans-serif;font-weight:600;}
+  .list-item p{margin:0;color:var(--muted);font-size:0.86rem;}
+  .list-actions{display:flex;gap:8px;flex-wrap:wrap;}
+
+  .badge{display:inline-block;padding:3px 11px;border-radius:999px;font-size:0.74rem;font-weight:700;}
+  .badge-success{background:#e5f6ec;color:var(--success);}
+  .badge-warning{background:#fdf3dc;color:#a5760c;}
+  .badge-danger{background:#fbe7e5;color:var(--danger);}
+  .badge-info{background:#eaf1fb;color:var(--navy);}
+
+  .empty-state{text-align:center;padding:50px 20px;color:var(--muted);}
+
+  .meeting-box{
+    background:linear-gradient(135deg,#eef2f6,#f6f4ec);
+    border:1.4px dashed var(--navy-3);border-radius:12px;padding:22px;text-align:center;margin:18px 0;
+  }
+
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(14,20,28,0.55);
+    display:flex;align-items:center;justify-content:center;z-index:500;padding:20px;
+  }
+  .modal{background:#fff;border-radius:var(--radius);padding:28px;width:100%;max-width:460px;max-height:88vh;overflow-y:auto;}
+  .modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
+  .modal-close{background:none;border:none;font-size:1.4rem;color:var(--muted);line-height:1;}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--navy);color:rgba(250,246,238,0.85);padding:50px 0 26px;margin-top:0;}
+  footer .container{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;}
+  footer h4{color:var(--cream);margin-bottom:12px;font-family:'Fraunces',serif;font-weight:600;}
+  footer a,footer button.linklike{
+    color:rgba(250,246,238,0.72);display:block;margin-bottom:8px;font-size:0.9rem;
+    background:none;border:none;text-align:left;padding:0;font-family:inherit;
+  }
+  footer a:hover,footer button.linklike:hover{color:var(--gold-2);}
+  .footer-bottom{text-align:center;font-size:0.78rem;opacity:0.55;margin-top:30px;}
+
+  .view{display:none;}
+  .view.active{display:block;}
+
+  .file-drop{
+    border:1.5px dashed var(--line);border-radius:10px;padding:16px;text-align:center;
+    font-size:0.87rem;color:var(--muted);background:#fdfcf9;
+  }
+  .file-drop input{margin-top:8px;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <svg class="sunburst-inline" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="7" fill="#e8b64a"/>
+        <g stroke="#e8b64a" stroke-width="2.2" stroke-linecap="round">
+          <line x1="20" y1="2" x2="20" y2="8"/>
+          <line x1="20" y1="32" x2="20" y2="38"/>
+          <line x1="2" y1="20" x2="8" y2="20"/>
+          <line x1="32" y1="20" x2="38" y2="20"/>
+          <line x1="7" y1="7" x2="11.5" y2="11.5"/>
+          <line x1="28.5" y1="28.5" x2="33" y2="33"/>
+          <line x1="33" y1="7" x2="28.5" y2="11.5"/>
+          <line x1="11.5" y1="28.5" x2="7" y2="33"/>
+        </g>
+      </svg>
+      Solas Learning Academy
+    </div>
+    <nav class="navlinks" id="navlinks">
+      <button class="link" onclick="go('home')">Home</button>
+      <button class="link" onclick="go('courses')">Courses</button>
+      <button class="link" onclick="go('contact')">Contact Us</button>
+      <span id="navAuthArea"></span>
+    </nav>
+  </div>
+</div>
+
+<!-- ================= HOME ================= -->
+<div class="view active" id="view-home">
+  <section class="hero">
+    <div class="container">
+      <div class="eyebrow">
+        <svg class="sunburst-inline" viewBox="0 0 40 40" fill="none" style="width:16px;height:16px;">
+          <circle cx="20" cy="20" r="7" fill="#f4d488"/>
+          <g stroke="#f4d488" stroke-width="3" stroke-linecap="round">
+            <line x1="20" y1="2" x2="20" y2="8"/><line x1="20" y1="32" x2="20" y2="38"/>
+            <line x1="2" y1="20" x2="8" y2="20"/><line x1="32" y1="20" x2="38" y2="20"/>
+          </g>
+        </svg>
+        Solas — Irish for "light"
+      </div>
+      <h1>Bringing light to every learner's journey</h1>
+      <p>Live classes, resources, assignments, and secure enrollment — all in one place, built for teachers, students, and administrators.</p>
+      <div class="hero-actions">
+        <button class="btn btn-gold" onclick="openAuth('register','student')">Join as a Student</button>
+        <button class="btn btn-outline-light" onclick="openAuth('register','teacher')">Become a Teacher</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="eyebrow-label" style="color:#a5811f;">What's inside</div>
+    <h2 class="section-title">Everything your classroom needs</h2>
+    <p class="section-subtitle">One place for the whole academy — from the first join code to the final grade.</p>
+    <div class="grid grid-3">
+      <div class="card feature-card"><div class="feature-icon">&#128218;</div><h3>Rich Resources</h3><p>Teachers upload notes, slides, and videos students can access anytime from their course page.</p></div>
+      <div class="card feature-card"><div class="feature-icon">&#128221;</div><h3>Assignments & Grading</h3><p>Set due dates, collect submissions, and return marks with feedback — all in one thread.</p></div>
+      <div class="card feature-card"><div class="feature-icon">&#127909;</div><h3>Live Class Joining</h3><p>Students join live sessions instantly with a class code or a direct meeting link.</p></div>
+      <div class="card feature-card"><div class="feature-icon">&#128179;</div><h3>Secure Payments</h3><p>Enroll in premium courses through a smooth checkout — free courses join instantly.</p></div>
+      <div class="card feature-card"><div class="feature-icon">&#129489;&#8205;&#127979;</div><h3>Role-Based Dashboards</h3><p>Purpose-built views for Admins, Teachers, and Students — each with exactly what they need.</p></div>
+      <div class="card feature-card"><div class="feature-icon">&#128274;</div><h3>Secure Accounts</h3><p>Every account and every classroom is protected behind proper authentication.</p></div>
+    </div>
+  </section>
+
+  <section class="section container" style="text-align:center;">
+    <div class="card" style="padding:50px 30px;">
+      <svg class="sunburst" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="7" fill="#e8b64a"/>
+        <g stroke="#e8b64a" stroke-width="2.2" stroke-linecap="round">
+          <line x1="20" y1="2" x2="20" y2="8"/><line x1="20" y1="32" x2="20" y2="38"/>
+          <line x1="2" y1="20" x2="8" y2="20"/><line x1="32" y1="20" x2="38" y2="20"/>
+          <line x1="7" y1="7" x2="11.5" y2="11.5"/><line x1="28.5" y1="28.5" x2="33" y2="33"/>
+          <line x1="33" y1="7" x2="28.5" y2="11.5"/><line x1="11.5" y1="28.5" x2="7" y2="33"/>
+        </g>
+      </svg>
+      <h2 class="section-title">Ready to get started?</h2>
+      <p class="section-subtitle" style="margin-left:auto;margin-right:auto;">Create your free account and join your first class in minutes.</p>
+      <button class="btn btn-navy" onclick="openAuth('register','student')">Create Free Account</button>
+    </div>
+  </section>
+</div>
+
+<!-- ================= COURSES ================= -->
+<div class="view" id="view-courses">
+  <section class="section container">
+    <div class="eyebrow-label" style="color:#a5811f;">Catalog</div>
+    <h1 class="section-title">Explore Courses</h1>
+    <p class="section-subtitle">Browse available classes, or join instantly with a class code from your teacher.</p>
+
+    <div class="card" style="margin-bottom:30px;" id="joinCodeBox">
+      <h3 style="margin-bottom:14px;">Have a class code?</h3>
+      <div id="joinMsg"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <input id="joinCodeInput" placeholder="e.g. A1B2C3" style="flex:1;min-width:200px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;">
+        <button class="btn btn-gold" onclick="handleJoinByCode()">Join Class</button>
+      </div>
+    </div>
+
+    <div class="grid grid-3" id="courseGrid"></div>
+  </section>
+</div>
+
+<!-- ================= COURSE DETAIL ================= -->
+<div class="view" id="view-course-detail">
+  <section class="section container" id="courseDetailRoot"></section>
+</div>
+
+<!-- ================= CONTACT ================= -->
+<div class="view" id="view-contact">
+  <section class="section container">
+    <div class="eyebrow-label" style="color:#a5811f;">Get in touch</div>
+    <h1 class="section-title">Contact Us</h1>
+    <p class="section-subtitle">Have a question about a course, an assignment, or your account? Reach out — we're happy to help.</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3 style="margin-bottom:16px;">Send us a message</h3>
+        <div id="contactMsg"></div>
+        <form id="contactForm" onsubmit="handleContact(event)">
+          <div class="form-group"><label>Your Name</label><input id="cName" required></div>
+          <div class="form-group"><label>Your Email</label><input id="cEmail" type="email" required></div>
+          <div class="form-group"><label>Message</label><textarea id="cMessage" required></textarea></div>
+          <button class="btn btn-navy btn-block">Send Message</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:16px;">Reach us directly</h3>
+        <p style="color:var(--muted);">Prefer email? Write to us directly and our team will respond as soon as possible.</p>
+        <p style="font-size:1.05rem;">&#128231; <a href="mailto:abrarhasan02011@gmail.com" style="color:var(--navy);font-weight:700;">abrarhasan02011@gmail.com</a></p>
+        <p style="color:var(--muted);font-size:0.88rem;">We typically respond within 1–2 business days.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= STUDENT DASHBOARD ================= -->
+<div class="view" id="view-student">
+  <div class="container dashboard" style="padding:36px 24px 60px;">
+    <div class="dash-header">
+      <div><h1 id="studentGreeting">Welcome back</h1><p>Here's what's happening across your classes.</p></div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-card"><div class="val" id="studCourseCount">0</div><div class="lbl">Enrolled Classes</div></div>
+      <div class="stat-card"><div class="val" id="studPaymentCount">0</div><div class="lbl">Payments Made</div></div>
+    </div>
+    <div class="card" style="margin-bottom:30px;">
+      <h3 style="margin-bottom:14px;">Join a New Class</h3>
+      <div id="studJoinMsg"></div>
+      <div style="display:flex;gap:10px;">
+        <input id="studJoinInput" placeholder="Enter class join code" style="flex:1;padding:10px 12px;border:1px solid var(--line);border-radius:8px;">
+        <button class="btn btn-gold" onclick="handleStudentJoin()">Join</button>
+      </div>
+    </div>
+    <h2 style="font-size:1.25rem;margin-bottom:16px;font-family:'Fraunces',serif;">My Classes</h2>
+    <div class="grid grid-3" id="studentCourseGrid"></div>
+    <h2 style="font-size:1.25rem;margin:36px 0 16px;font-family:'Fraunces',serif;">Payment History</h2>
+    <div id="studentPaymentList"></div>
+  </div>
+</div>
+
+<!-- ================= TEACHER DASHBOARD ================= -->
+<div class="view" id="view-teacher">
+  <div class="container dashboard" style="padding:36px 24px 60px;">
+    <div class="dash-header">
+      <div><h1 id="teacherGreeting">Hello</h1><p>Manage your classes, resources, and assignments.</p></div>
+      <button class="btn btn-gold" onclick="toggleCreateClassForm()">+ Create New Class</button>
+    </div>
+    <div class="stat-row">
+      <div class="stat-card"><div class="val" id="teachCourseCount">0</div><div class="lbl">Classes</div></div>
+      <div class="stat-card"><div class="val" id="teachStudentCount">0</div><div class="lbl">Total Students</div></div>
+    </div>
+    <div id="teachMsg"></div>
+    <div class="card" style="margin-bottom:30px;display:none;" id="createClassForm">
+      <h3 style="margin-bottom:16px;">Create a New Class</h3>
+      <div class="form-row">
+        <div class="form-group"><label>Title</label><input id="ccTitle"></div>
+        <div class="form-group"><label>Subject</label><input id="ccSubject" placeholder="e.g. Mathematics"></div>
+      </div>
+      <div class="form-group"><label>Description</label><textarea id="ccDesc"></textarea></div>
+      <div class="form-row">
+        <div class="form-group"><label>Price (USD, 0 = free)</label><input id="ccPrice" type="number" min="0" step="0.01" value="0"></div>
+        <div class="form-group"><label>Schedule</label><input id="ccSchedule" placeholder="Mon/Wed/Fri 6:00 PM"></div>
+      </div>
+      <div class="form-group"><label>Meeting Link (Zoom / Meet / Jitsi)</label><input id="ccMeeting" placeholder="https://meet.jit.si/your-room-name"></div>
+      <button class="btn btn-navy" onclick="handleCreateClass()">Create Class</button>
+    </div>
+    <h2 style="font-size:1.25rem;margin-bottom:16px;font-family:'Fraunces',serif;">My Classes</h2>
+    <div id="teacherCourseList"></div>
+  </div>
+</div>
+
+<!-- ================= ADMIN DASHBOARD ================= -->
+<div class="view" id="view-admin">
+  <div class="container dashboard" style="padding:36px 24px 60px;">
+    <div class="dash-header"><div><h1>Admin Console</h1><p id="adminGreeting">Manage the whole academy from here.</p></div></div>
+    <div class="stat-row">
+      <div class="stat-card"><div class="val" id="adUserCount">0</div><div class="lbl">Total Users</div></div>
+      <div class="stat-card"><div class="val" id="adCourseCount">0</div><div class="lbl">Total Classes</div></div>
+      <div class="stat-card"><div class="val" id="adPaymentCount">0</div><div class="lbl">Payments</div></div>
+      <div class="stat-card"><div class="val" id="adRevenue">$0</div><div class="lbl">Total Revenue</div></div>
+    </div>
+    <div id="adminMsg"></div>
+    <div class="tabs">
+      <button class="active" data-tab="users" onclick="setAdminTab('users')">Users</button>
+      <button data-tab="courses" onclick="setAdminTab('courses')">Classes</button>
+      <button data-tab="payments" onclick="setAdminTab('payments')">Payments</button>
+    </div>
+    <div id="adminTabContent"></div>
+  </div>
+</div>
+
+<!-- ================= AUTH MODAL ================= -->
+<div class="modal-overlay" id="authModal" style="display:none;">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="authModalTitle">Log In</h3>
+      <button class="modal-close" onclick="closeAuth()">&times;</button>
+    </div>
+    <div id="authMsg"></div>
+    <div id="authRegisterFields" style="display:none;">
+      <div class="form-group"><label>Full Name</label><input id="authName" placeholder="Jane Doe"></div>
+      <div class="role-toggle">
+        <button type="button" id="roleStudentBtn" class="active" onclick="setAuthRole('student')">Student</button>
+        <button type="button" id="roleTeacherBtn" onclick="setAuthRole('teacher')">Teacher</button>
+      </div>
+    </div>
+    <div class="form-group"><label>Email</label><input id="authEmail" type="email" placeholder="you@example.com"></div>
+    <div class="form-group"><label>Password</label><input id="authPassword" type="password" placeholder="At least 6 characters"></div>
+    <button class="btn btn-gold btn-block" onclick="submitAuth()" id="authSubmitBtn">Log In</button>
+    <p class="helper-text" id="authSwitchLine"></p>
+  </div>
+</div>
+
+<!-- ================= PAYMENT MODAL ================= -->
+<div class="modal-overlay" id="payModal" style="display:none;">
+  <div class="modal">
+    <div class="modal-head"><h3>Checkout</h3><button class="modal-close" onclick="closePayModal()">&times;</button></div>
+    <div id="payModalBody"></div>
+  </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="container">
+    <div>
+      <h4>Solas Learning Academy</h4>
+      <p style="max-width:260px;font-size:0.88rem;opacity:0.75;">Bringing light to learning — quality online classes, resources, and mentorship for students everywhere.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <button class="linklike" onclick="go('courses')">Browse Courses</button>
+      <button class="linklike" onclick="openAuth('register','student')">Sign Up</button>
+      <button class="linklike" onclick="openAuth('login')">Login</button>
+    </div>
+    <div>
+      <h4>Contact Us</h4>
+      <a href="mailto:abrarhasan02011@gmail.com">abrarhasan02011@gmail.com</a>
+      <button class="linklike" onclick="go('contact')">Send us a message</button>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; <span id="yearNow"></span> Solas Learning Academy. All rights reserved.</div>
+</footer>
+
+<script>
+/* =========================================================================
+   SOLAS LEARNING ACADEMY — static single-file front-end demo
+   All data lives in memory (JS variables) for this session only.
+   This is a UI/UX demo of the full MERN app; wire it to the real backend
+   (see the accompanying backend/ folder) for persistent multi-user data.
+   ========================================================================= */
+
+document.getElementById('yearNow').textContent = new Date().getFullYear();
+
+// ---------- seed data ----------
+let users = [
+  {id:'u_admin', name:'Solas Admin', email:'admin@solaslearningacademy.com', password:'admin123', role:'admin', isActive:true},
+  {id:'u_teach1', name:'Dr. Amina Rahman', email:'amina@example.com', password:'teach123', role:'teacher', isActive:true},
+  {id:'u_stud1', name:'Malik Chowdhury', email:'malik@example.com', password:'stud123', role:'student', isActive:true},
+];
+let courses = [
+  {id:'c1', title:'Algebra Foundations', subject:'Mathematics', description:'Master the building blocks of algebra: equations, functions, and graphing.', teacherId:'u_teach1', price:0, joinCode:'ALG101', meetingLink:'https://meet.jit.si/solas-algebra-101', schedule:'Mon/Wed 5:00 PM', students:['u_stud1']},
+  {id:'c2', title:'IELTS Speaking Mastery', subject:'English', description:'Focused speaking practice and feedback to help you hit band 7+.', teacherId:'u_teach1', price:25, joinCode:'IELTS7', meetingLink:'https://meet.jit.si/solas-ielts-speaking', schedule:'Tue/Thu 7:00 PM', students:[]},
+  {id:'c3', title:'Intro to Web Development', subject:'Computer Science', description:'HTML, CSS, and JavaScript fundamentals for absolute beginners.', teacherId:'u_teach1', price:0, joinCode:'WEBDEV', meetingLink:'https://meet.jit.si/solas-webdev-intro', schedule:'Sat 10:00 AM', students:[]},
+];
+let resources = [
+  {id:'r1', courseId:'c1', title:'Week 1 Slides — Linear Equations', description:'Slide deck covering linear equations basics.', fileName:'week1-slides.pdf'},
+  {id:'r2', courseId:'c1', title:'Practice Problem Set', description:'20 practice problems with answer key.', fileName:'practice-set.pdf'},
+];
+let assignments = [
+  {id:'a1', courseId:'c1', title:'Homework 1 — Solving Equations', description:'Complete problems 1–15 from the practice set.', dueDate:'2026-08-05', maxMarks:100},
+];
+let submissions = []; // {id, assignmentId, studentId, fileName, status, marksObtained, feedback}
+let payments = []; // {id, studentId, courseId, amount, status, date}
+
+let idCounter = 100;
+const newId = (prefix) => prefix + (idCounter++);
+
+let currentUser = null;
+let authMode = 'login'; // 'login' | 'register'
+let authRole = 'student';
+let currentCourseId = null;
+let adminTab = 'users';
+let pendingPayCourseId = null;
+
+// ---------- helpers ----------
+const $ = (id) => document.getElementById(id);
+const money = (n) => '$' + Number(n).toFixed(2);
+const genJoinCode = () => Math.random().toString(36).substring(2,8).toUpperCase();
+const findUser = (id) => users.find(u => u.id === id);
+const findCourse = (id) => courses.find(c => c.id === id);
+
+function alertBox(type, message){
+  return `<div class="alert alert-${type==='success'?'success':'error'}">${message}</div>`;
+}
+
+// ---------- navigation ----------
+function go(viewName){
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  $('view-' + viewName).classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+  if(viewName === 'courses') renderCourseGrid();
+  if(viewName === 'student') renderStudentDashboard();
+  if(viewName === 'teacher') renderTeacherDashboard();
+  if(viewName === 'admin') renderAdminDashboard();
+}
+
+function renderNav(){
+  const area = $('navAuthArea');
+  if(currentUser){
+    const dash = currentUser.role === 'admin' ? 'admin' : currentUser.role === 'teacher' ? 'teacher' : 'student';
+    area.innerHTML = `
+      <button class="link" onclick="go('${dash}')">Dashboard</button>
+      <span class="pill-badge">${currentUser.role}</span>
+      <button class="link" onclick="logout()">Logout</button>
+    `;
+  } else {
+    area.innerHTML = `
+      <button class="link" onclick="openAuth('login')">Login</button>
+      <button class="btn btn-gold btn-sm" onclick="openAuth('register','student')">Get Started</button>
+    `;
+  }
+}
+
+// ---------- auth modal ----------
+function openAuth(mode, role){
+  authMode = mode;
+  authRole = role || 'student';
+  $('authModal').style.display = 'flex';
+  $('authMsg').innerHTML = '';
+  $('authName').value=''; $('authEmail').value=''; $('authPassword').value='';
+  updateAuthModalUI();
+}
+function closeAuth(){ $('authModal').style.display = 'none'; }
+function setAuthRole(role){
+  authRole = role;
+  $('roleStudentBtn').classList.toggle('active', role==='student');
+  $('roleTeacherBtn').classList.toggle('active', role==='teacher');
+}
+function updateAuthModalUI(){
+  const isRegister = authMode === 'register';
+  $('authModalTitle').textContent = isRegister ? 'Create your account' : 'Welcome back';
+  $('authRegisterFields').style.display = isRegister ? 'block' : 'none';
+  $('authSubmitBtn').textContent = isRegister ? 'Sign Up' : 'Log In';
+  setAuthRole(authRole);
+  $('authSwitchLine').innerHTML = isRegister
+    ? `Already have an account? <button class="linklike" onclick="switchAuthMode('login')">Log in here</button>`
+    : `Don't have an account? <button class="linklike" onclick="switchAuthMode('register')">Sign up here</button>`;
+}
+function switchAuthMode(mode){ authMode = mode; updateAuthModalUI(); $('authMsg').innerHTML=''; }
+
+function submitAuth(){
+  const email = $('authEmail').value.trim().toLowerCase();
+  const password = $('authPassword').value;
+
+  if(authMode === 'register'){
+    const name = $('authName').value.trim();
+    if(!name || !email || !password){ $('authMsg').innerHTML = alertBox('error','Please fill in all fields.'); return; }
+    if(password.length < 6){ $('authMsg').innerHTML = alertBox('error','Password must be at least 6 characters.'); return; }
+    if(users.some(u => u.email === email)){ $('authMsg').innerHTML = alertBox('error','An account with this email already exists.'); return; }
+    const user = {id:newId('u_'), name, email, password, role:authRole, isActive:true};
+    users.push(user);
+    currentUser = user;
+    closeAuth(); renderNav();
+    go(user.role === 'teacher' ? 'teacher' : 'student');
+  } else {
+    if(!email || !password){ $('authMsg').innerHTML = alertBox('error','Please enter your email and password.'); return; }
+    const user = users.find(u => u.email === email && u.password === password);
+    if(!user){ $('authMsg').innerHTML = alertBox('error','Invalid email or password.'); return; }
+    if(!user.isActive){ $('authMsg').innerHTML = alertBox('error','This account has been deactivated.'); return; }
+    currentUser = user;
+    closeAuth(); renderNav();
+    go(user.role === 'admin' ? 'admin' : user.role === 'teacher' ? 'teacher' : 'student');
+  }
+}
+function logout(){ currentUser = null; renderNav(); go('home'); }
+
+// ---------- courses catalog ----------
+function renderCourseGrid(){
+  const grid = $('courseGrid');
+  if(courses.length === 0){ grid.innerHTML = '<div class="empty-state">No courses available yet. Check back soon!</div>'; return; }
+  grid.innerHTML = courses.map(c => {
+    const teacher = findUser(c.teacherId);
+    return `
+    <div class="card course-card">
+      <span class="subject-tag">${c.subject}</span>
+      <h3>${c.title}</h3>
+      <p class="teacher">Taught by ${teacher ? teacher.name : 'TBA'}</p>
+      <p style="color:var(--muted);font-size:0.9rem;">${c.description}</p>
+      <span class="course-price ${c.price===0?'free':''}">${c.price===0?'Free':money(c.price)}</span>
+      <button class="btn btn-ghost btn-sm" onclick="openCourseDetail('${c.id}')">View Details</button>
+    </div>`;
+  }).join('');
+  $('joinCodeBox').style.display = currentUser && currentUser.role === 'student' ? 'block' : 'none';
+  $('joinMsg').innerHTML = '';
+}
+
+function handleJoinByCode(){
+  if(!currentUser || currentUser.role !== 'student'){ openAuth('login'); return; }
+  const code = $('joinCodeInput').value.trim().toUpperCase();
+  const result = joinCourseByCode(code, currentUser.id);
+  $('joinMsg').innerHTML = alertBox(result.ok ? 'success' : 'error', result.message);
+  if(result.ok){ $('joinCodeInput').value=''; renderCourseGrid(); }
+}
+
+function joinCourseByCode(code, studentId){
+  const course = courses.find(c => c.joinCode === code);
+  if(!course) return {ok:false, message:'Invalid join code.'};
+  if(course.students.includes(studentId)) return {ok:false, message:'You are already enrolled in this class.'};
+  if(course.price > 0) return {ok:false, message:`This is a paid class (${money(course.price)}). Open the course page to pay and join.`};
+  course.students.push(studentId);
+  return {ok:true, message:`Successfully joined "${course.title}"!`};
+}
+
+// ---------- course detail ----------
+function openCourseDetail(courseId){
+  currentCourseId = courseId;
+  go('course-detail');
+  renderCourseDetail();
+}
+
+function renderCourseDetail(tab){
+  const course = findCourse(currentCourseId);
+  const root = $('courseDetailRoot');
+  if(!course){ root.innerHTML = '<div class="empty-state">Course not found.</div>'; return; }
+  const teacher = findUser(course.teacherId);
+  const isStudent = currentUser && currentUser.role === 'student';
+  const isEnrolled = currentUser && course.students.includes(currentUser.id);
+  const isOwner = currentUser && (currentUser.role === 'admin' || (currentUser.role === 'teacher' && currentUser.id === course.teacherId));
+  const canSeeContent = currentUser && (currentUser.role !== 'student' || isEnrolled);
+  tab = tab || root.dataset.tab || 'overview';
+  root.dataset.tab = tab;
+
+  let html = `
+    <div class="dash-header">
+      <div>
+        <h1>${course.title}</h1>
+        <p>${course.description}</p>
+        <p style="font-size:0.85rem;color:var(--muted);">Taught by ${teacher ? teacher.name : 'TBA'} &middot;
+          <span class="course-price ${course.price===0?'free':''}">${course.price===0?'Free':money(course.price)}</span>
+        </p>
+      </div>
+      ${isOwner ? `<span class="join-code">Join Code: ${course.joinCode}</span>` : ''}
+    </div>
+    <div id="courseDetailMsg"></div>
+  `;
+
+  if(isStudent && !isEnrolled){
+    html += `
+      <div class="card" style="margin-bottom:24px;">
+        <h3 style="margin-bottom:10px;">${course.price===0?'Join this free class':'Enroll in this class'}</h3>
+        <p style="color:var(--muted);margin-bottom:16px;">${course.price===0
+          ? 'This class is free — join instantly to access resources and assignments.'
+          : `Pay ${money(course.price)} to unlock resources, assignments, and live class access.`}</p>
+        ${course.price===0
+          ? `<button class="btn btn-gold" onclick="handleDetailFreeJoin()">Join Class</button>`
+          : `<button class="btn btn-gold" onclick="openPayModal('${course.id}')">Pay ${money(course.price)} &amp; Join</button>`}
+      </div>`;
+  }
+
+  if(!currentUser){
+    html += `<div class="card" style="margin-bottom:24px;"><p style="margin:0;color:var(--muted);">Please <button class="linklike" style="color:var(--navy);font-weight:700;" onclick="openAuth('login')">log in</button> to view class content.</p></div>`;
+  }
+
+  if(canSeeContent){
+    html += `
+      <div class="tabs">
+        <button class="${tab==='overview'?'active':''}" onclick="renderCourseDetail('overview')">Overview</button>
+        <button class="${tab==='resources'?'active':''}" onclick="renderCourseDetail('resources')">Resources</button>
+        <button class="${tab==='assignments'?'active':''}" onclick="renderCourseDetail('assignments')">Assignments</button>
+      </div>
+    `;
+
+    if(tab === 'overview'){
+      html += `<div class="card"><h3 style="margin-bottom:10px;">Live Class</h3>`;
+      if(course.schedule) html += `<p>&#128197; Schedule: ${course.schedule}</p>`;
+      if(course.meetingLink){
+        html += `<div class="meeting-box"><p style="margin:0 0 12px;">Class is ready to join.</p>
+          <a href="${course.meetingLink}" target="_blank" rel="noreferrer" class="btn btn-gold">Join Live Class</a></div>`;
+      } else {
+        html += `<p style="color:var(--muted);">No live meeting link has been posted yet.</p>`;
+      }
+      html += `</div>`;
+    }
+
+    if(tab === 'resources'){
+      if(isOwner){
+        html += `
+          <div class="card" style="margin-bottom:20px;">
+            <h3 style="margin-bottom:14px;">Upload a Resource</h3>
+            <div class="form-row">
+              <div class="form-group"><label>Title</label><input id="resTitle" placeholder="e.g. Week 1 Slides"></div>
+              <div class="form-group"><label>Description</label><input id="resDesc" placeholder="Optional"></div>
+            </div>
+            <div class="form-group">
+              <label>File</label>
+              <div class="file-drop"><input type="file" id="resFile">Choose a file to attach</div>
+            </div>
+            <button class="btn btn-navy" onclick="handleUploadResource()">Upload</button>
+          </div>`;
+      }
+      const courseResources = resources.filter(r => r.courseId === course.id);
+      if(courseResources.length === 0){
+        html += `<div class="empty-state">No resources uploaded yet.</div>`;
+      } else {
+        html += courseResources.map(r => `
+          <div class="list-item">
+            <div><h4>${r.title}</h4><p>${r.description || r.fileName}</p></div>
+            <div class="list-actions"><button class="btn btn-ghost btn-sm" onclick="alert('Demo mode: file download requires the live backend.')">Download</button></div>
+          </div>`).join('');
+      }
+    }
+
+    if(tab === 'assignments'){
+      if(isOwner){
+        html += `
+          <div class="card" style="margin-bottom:20px;">
+            <h3 style="margin-bottom:14px;">Create Assignment</h3>
+            <div class="form-group"><label>Title</label><input id="asgTitle"></div>
+            <div class="form-group"><label>Description</label><textarea id="asgDesc"></textarea></div>
+            <div class="form-row">
+              <div class="form-group"><label>Due Date</label><input type="date" id="asgDue"></div>
+              <div class="form-group"><label>Max Marks</label><input type="number" id="asgMax" value="100"></div>
+            </div>
+            <button class="btn btn-navy" onclick="handleCreateAssignment()">Create Assignment</button>
+          </div>`;
+      }
+      const courseAssignments = assignments.filter(a => a.courseId === course.id);
+      if(courseAssignments.length === 0){
+        html += `<div class="empty-state">No assignments posted yet.</div>`;
+      } else {
+        html += courseAssignments.map(a => {
+          const mySub = currentUser && currentUser.role==='student' ? submissions.find(s => s.assignmentId===a.id && s.studentId===currentUser.id) : null;
+          return `
+          <div class="list-item" style="align-items:flex-start;">
+            <div><h4>${a.title}</h4><p>${a.description}</p>
+              <p>Due: ${new Date(a.dueDate).toLocaleDateString()} &middot; Max Marks: ${a.maxMarks}</p>
+              ${mySub ? `<span class="badge ${mySub.status==='graded'?'badge-success':'badge-info'}">${mySub.status}${mySub.status==='graded' ? ' — '+mySub.marksObtained+'/'+a.maxMarks : ''}</span>` : ''}
+            </div>
+            ${currentUser && currentUser.role==='student' ? `
+              <div class="list-actions" style="flex-direction:column;align-items:flex-end;gap:8px;">
+                <div class="file-drop" style="padding:10px;"><input type="file" id="submit-file-${a.id}"></div>
+                <button class="btn btn-gold btn-sm" onclick="handleSubmitAssignment('${a.id}')">${mySub ? 'Resubmit' : 'Submit Work'}</button>
+              </div>` : ''}
+          </div>`;
+        }).join('');
+      }
+    }
+  }
+
+  root.innerHTML = html;
+}
+
+function handleDetailFreeJoin(){
+  const course = findCourse(currentCourseId);
+  const result = joinCourseByCode(course.joinCode, currentUser.id);
+  $('courseDetailMsg').innerHTML = alertBox(result.ok?'success':'error', result.message);
+  if(result.ok) renderCourseDetail('overview');
+}
+
+function handleUploadResource(){
+  const title = $('resTitle').value.trim();
+  const desc = $('resDesc').value.trim();
+  const file = $('resFile').files[0];
+  if(!file){ $('courseDetailMsg').innerHTML = alertBox('error','Please choose a file.'); return; }
+  resources.push({id:newId('r_'), courseId:currentCourseId, title: title || file.name, description: desc, fileName: file.name});
+  $('courseDetailMsg').innerHTML = alertBox('success','Resource uploaded.');
+  renderCourseDetail('resources');
+}
+
+function handleCreateAssignment(){
+  const title = $('asgTitle').value.trim();
+  const due = $('asgDue').value;
+  if(!title || !due){ $('courseDetailMsg').innerHTML = alertBox('error','Title and due date are required.'); return; }
+  assignments.push({id:newId('a_'), courseId:currentCourseId, title, description:$('asgDesc').value.trim(), dueDate:due, maxMarks:Number($('asgMax').value)||100});
+  $('courseDetailMsg').innerHTML = alertBox('success','Assignment created.');
+  renderCourseDetail('assignments');
+}
+
+function handleSubmitAssignment(assignmentId){
+  const fileInput = $('submit-file-' + assignmentId);
+  const file = fileInput.files[0];
+  if(!file){ $('courseDetailMsg').innerHTML = alertBox('error','Choose a file to submit first.'); return; }
+  const existing = submissions.find(s => s.assignmentId===assignmentId && s.studentId===currentUser.id);
+  if(existing){ existing.fileName = file.name; existing.status='submitted'; existing.marksObtained=null; }
+  else submissions.push({id:newId('s_'), assignmentId, studentId:currentUser.id, fileName:file.name, status:'submitted', marksObtained:null, feedback:''});
+  $('courseDetailMsg').innerHTML = alertBox('success','Assignment submitted!');
+  renderCourseDetail('assignments');
+}
+
+// ---------- payment modal ----------
+function openPayModal(courseId){
+  pendingPayCourseId = courseId;
+  const course = findCourse(courseId);
+  $('payModal').style.display = 'flex';
+  $('payModalBody').innerHTML = `
+    <p style="color:var(--muted);margin-bottom:18px;">You're enrolling in <strong>${course.title}</strong>.</p>
+    <div class="card" style="background:#fdfcf9;margin-bottom:18px;">
+      <div style="display:flex;justify-content:space-between;font-size:0.92rem;margin-bottom:8px;">
+        <span>Course fee</span><strong>${money(course.price)}</strong>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:0.92rem;color:var(--muted);">
+        <span>Total due today</span><strong>${money(course.price)}</strong>
+      </div>
+    </div>
+    <div class="form-group"><label>Card Number</label><input placeholder="4242 4242 4242 4242" maxlength="19"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Expiry</label><input placeholder="MM/YY"></div>
+      <div class="form-group"><label>CVC</label><input placeholder="123"></div>
+    </div>
+    <p style="font-size:0.78rem;color:var(--muted);margin-bottom:16px;">Demo checkout — no real card is charged. This simulates the Stripe-based flow in the live backend.</p>
+    <button class="btn btn-gold btn-block" onclick="confirmPayment()">Pay ${money(course.price)}</button>
+  `;
+}
+function closePayModal(){ $('payModal').style.display='none'; }
+function confirmPayment(){
+  const course = findCourse(pendingPayCourseId);
+  payments.push({id:newId('p_'), studentId:currentUser.id, courseId:course.id, amount:course.price*100, status:'succeeded', date:new Date().toISOString()});
+  if(!course.students.includes(currentUser.id)) course.students.push(currentUser.id);
+  closePayModal();
+  if(currentCourseId === course.id){ $('courseDetailMsg') && ($('courseDetailMsg').innerHTML = alertBox('success','Payment successful — you are enrolled!')); renderCourseDetail('overview'); }
+  renderStudentDashboard();
+}
+
+// ---------- student dashboard ----------
+function renderStudentDashboard(){
+  if(!currentUser || currentUser.role !== 'student'){ return; }
+  $('studentGreeting').textContent = 'Welcome back, ' + currentUser.name.split(' ')[0];
+  const myCourses = courses.filter(c => c.students.includes(currentUser.id));
+  const myPayments = payments.filter(p => p.studentId === currentUser.id);
+  $('studCourseCount').textContent = myCourses.length;
+  $('studPaymentCount').textContent = myPayments.filter(p=>p.status==='succeeded').length;
+  $('studJoinMsg').innerHTML = '';
+
+  $('studentCourseGrid').innerHTML = myCourses.length === 0
+    ? `<div class="empty-state">You haven't joined any classes yet. Browse Courses or use a join code above.</div>`
+    : myCourses.map(c => `
+        <div class="card course-card">
+          <h3>${c.title}</h3>
+          <p class="teacher">Taught by ${findUser(c.teacherId)?.name || ''}</p>
+          <button class="btn btn-ghost btn-sm" onclick="openCourseDetail('${c.id}')">Go to Class</button>
+        </div>`).join('');
+
+  $('studentPaymentList').innerHTML = myPayments.length === 0
+    ? `<div class="empty-state">No payments yet.</div>`
+    : myPayments.map(p => {
+        const c = findCourse(p.courseId);
+        return `<div class="list-item">
+          <div><h4>${c ? c.title : 'Unknown course'}</h4><p>${money(p.amount/100)} &middot; ${new Date(p.date).toLocaleDateString()}</p></div>
+          <span class="badge badge-success">${p.status}</span>
+        </div>`;
+      }).join('');
+}
+
+function handleStudentJoin(){
+  const code = $('studJoinInput').value.trim().toUpperCase();
+  const result = joinCourseByCode(code, currentUser.id);
+  $('studJoinMsg').innerHTML = alertBox(result.ok?'success':'error', result.message);
+  if(result.ok){ $('studJoinInput').value=''; renderStudentDashboard(); }
+}
+
+// ---------- teacher dashboard ----------
+function toggleCreateClassForm(){
+  const form = $('createClassForm');
+  form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
+function renderTeacherDashboard(){
+  if(!currentUser || currentUser.role !== 'teacher') return;
+  $('teacherGreeting').textContent = 'Hello, ' + currentUser.name.split(' ')[0];
+  const myCourses = courses.filter(c => c.teacherId === currentUser.id);
+  $('teachCourseCount').textContent = myCourses.length;
+  $('teachStudentCount').textContent = myCourses.reduce((sum,c)=>sum+c.students.length,0);
+  $('teacherCourseList').innerHTML = myCourses.length === 0
+    ? `<div class="empty-state">You haven't created any classes yet.</div>`
+    : myCourses.map(c => `
+        <div class="list-item">
+          <div><h4>${c.title}</h4><p>${c.students.length} students &middot; <span class="join-code">${c.joinCode}</span> &middot; ${c.price===0?'Free':money(c.price)}</p></div>
+          <div class="list-actions"><button class="btn btn-ghost btn-sm" onclick="openCourseDetail('${c.id}')">Manage</button></div>
+        </div>`).join('');
+}
+function handleCreateClass(){
+  const title = $('ccTitle').value.trim();
+  if(!title){ $('teachMsg').innerHTML = alertBox('error','Course title is required.'); return; }
+  const course = {
+    id:newId('c_'), title, subject:$('ccSubject').value.trim()||'General', description:$('ccDesc').value.trim(),
+    teacherId:currentUser.id, price:Number($('ccPrice').value)||0, joinCode:genJoinCode(),
+    meetingLink:$('ccMeeting').value.trim(), schedule:$('ccSchedule').value.trim(), students:[]
+  };
+  courses.push(course);
+  $('teachMsg').innerHTML = alertBox('success','Class created successfully!');
+  ['ccTitle','ccSubject','ccDesc','ccPrice','ccSchedule','ccMeeting'].forEach(id=>{ if(id!=='ccPrice') $(id).value=''; else $(id).value='0'; });
+  $('createClassForm').style.display = 'none';
+  renderTeacherDashboard();
+}
+
+// ---------- admin dashboard ----------
+function renderAdminDashboard(){
+  if(!currentUser || currentUser.role !== 'admin') return;
+  $('adminGreeting').textContent = 'Welcome, ' + currentUser.name + '. Manage the whole academy from here.';
+  $('adUserCount').textContent = users.length;
+  $('adCourseCount').textContent = courses.length;
+  $('adPaymentCount').textContent = payments.length;
+  const revenue = payments.filter(p=>p.status==='succeeded').reduce((s,p)=>s+p.amount,0);
+  $('adRevenue').textContent = money(revenue/100);
+  renderAdminTabContent();
+}
+function setAdminTab(tab){
+  adminTab = tab;
+  document.querySelectorAll('.tabs button').forEach(b => b.classList.toggle('active', b.dataset.tab===tab));
+  renderAdminTabContent();
+}
+function renderAdminTabContent(){
+  const el = $('adminTabContent');
+  if(adminTab === 'users'){
+    el.innerHTML = users.map(u => `
+      <div class="list-item">
+        <div><h4>${u.name} <span class="badge badge-info" style="margin-left:6px;">${u.role}</span></h4><p>${u.email}</p></div>
+        <div class="list-actions">
+          <span class="badge ${u.isActive?'badge-success':'badge-danger'}">${u.isActive?'Active':'Deactivated'}</span>
+          <button class="btn btn-ghost btn-sm" onclick="toggleUserActive('${u.id}')">${u.isActive?'Deactivate':'Activate'}</button>
+        </div>
+      </div>`).join('');
+  } else if(adminTab === 'courses'){
+    el.innerHTML = courses.map(c => `
+      <div class="list-item">
+        <div><h4>${c.title}</h4><p>By ${findUser(c.teacherId)?.name||'—'} &middot; ${c.students.length} students &middot; ${c.price===0?'Free':money(c.price)}</p></div>
+      </div>`).join('');
+  } else {
+    el.innerHTML = payments.length === 0 ? `<div class="empty-state">No payments yet.</div>` : payments.map(p => {
+      const c = findCourse(p.courseId); const s = findUser(p.studentId);
+      return `<div class="list-item">
+        <div><h4>${c?c.title:'—'}</h4><p>${s?s.name:'—'} &middot; ${money(p.amount/100)} &middot; ${new Date(p.date).toLocaleDateString()}</p></div>
+        <span class="badge badge-success">${p.status}</span>
+      </div>`;
+    }).join('');
+  }
+}
+function toggleUserActive(userId){
+  const u = findUser(userId);
+  u.isActive = !u.isActive;
+  $('adminMsg').innerHTML = alertBox('success', `${u.name} ${u.isActive?'activated':'deactivated'}.`);
+  renderAdminDashboard();
+}
+
+// ---------- contact form ----------
+function handleContact(e){
+  e.preventDefault();
+  const name = $('cName').value.trim(), email = $('cEmail').value.trim(), message = $('cMessage').value.trim();
+  if(!name || !email || !message){ $('contactMsg').innerHTML = alertBox('error','Please fill in all fields.'); return; }
+  console.log('Contact form submission ->', {to:'abrarhasan02011@gmail.com', name, email, message});
+  $('contactMsg').innerHTML = alertBox('success',"Thanks for reaching out! We'll get back to you soon.");
+  $('contactForm').reset();
+}
+
+// ---------- boot ----------
+renderNav();
+</script>
+</body>
+</html>
